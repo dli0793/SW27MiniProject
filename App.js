@@ -8,9 +8,11 @@ import LoadingScreen from './screens/LoadingScreen';
 import DashBoardScreen from './screens/DashboardScreen';
 import LoginScreen from './screens/LoginScreen';
 import ResultScreen from './screens/ResultScreen';
+import FetchingBarcode from './screens/FetchingBarcode';
 
 import firebase from 'firebase';
 import { firebaseConfig } from './config';
+
 firebase.initializeApp(firebaseConfig);
 
 export default class App extends React.Component {
@@ -26,7 +28,8 @@ const AppSwitchNavigator = createSwitchNavigator({
 	  LoginScreen:LoginScreen,
 	  DashBoardScreen:DashBoardScreen,
 	  //LoadingScreen:LoadingScreen,
-	  ResultScreen:ResultScreen
+	  ResultScreen:ResultScreen,
+    //FetchingBarcode:FetchingBarcode
 })
   
 const AppNavigator = createAppContainer(AppSwitchNavigator);

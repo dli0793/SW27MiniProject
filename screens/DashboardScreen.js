@@ -1,8 +1,9 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Container } from 'react-native';
+import { Text, View, StyleSheet, Button, Container, ImageBackground, TextInput } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
 import { withNavigation } from "react-navigation"
+import nodejs from 'nodejs-mobile-react-native';
 
 
 /*class DashboardScreen extends Component  {
@@ -102,7 +103,9 @@ class DashboardScreen extends Component{
   //Component State
   state = {
     hasPermission: null, // app has camera permission
-    scanned: false // if scanned already
+    scanned: false, // if scanned already
+    number: null,
+    onChangeNumber: null
   }
   async componentDidMount() {
     //asks for camera permission
@@ -121,6 +124,8 @@ class DashboardScreen extends Component{
   }
   render(){
     const { hasPermission, scanned } = this.state;
+    const { number, onChangeNumber } = this.state;
+
     if(hasPermission === null){
       // requesting permission
       return (
@@ -143,11 +148,25 @@ class DashboardScreen extends Component{
 	return(
 	  //barcode scanner
       <View style={styles.container}>
+	  <ImageBackground
+				source={require('../assets/orange.jpg')}
+				blurRadius={0.4}
+				style={styles.bgImg}
+	  >
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined:this.handleBarCodeScanned}
           style={{ height: 400, width: 400 }} />
       </View>
+
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeNumber}
+        value={number}
+        placeholder="Enter name of food"
+        //keyboardType="numeric"
+      />
+	  </ImageBackground>
     </View>
 	)
    }
@@ -155,7 +174,6 @@ class DashboardScreen extends Component{
 }
 
 export default withNavigation(DashboardScreen);
-
 
 const styles = StyleSheet.create({
   container: {
@@ -176,5 +194,17 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'blue'
-  }
+  },
+  bgImg: {
+		flex: 1,
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+		padding: 70
+  },
+  input: {
+    height: 40,
+    margin: 8,
+    borderWidth: 1,
+    padding: 10,
+  },
 });
