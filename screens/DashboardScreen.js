@@ -147,12 +147,12 @@ class DashboardScreen extends Component{
    else{
 	return(
 	  //barcode scanner
-      <View style={styles.container}>
-	  <ImageBackground
-				source={require('../assets/orange.jpg')}
-				blurRadius={0.4}
-				style={styles.bgImg}
-	  >
+    <View style={styles.container}>
+      <ImageBackground
+          source={require('../assets/orange.jpg')}
+          blurRadius={0.4}
+          style={styles.bgImg}
+      >
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined:this.handleBarCodeScanned}
@@ -161,10 +161,15 @@ class DashboardScreen extends Component{
 
       <TextInput
         style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
+        onChangeText={number => this.setState({ number })}  
+        value={this.state.number}
         placeholder="Enter name of food"
         //keyboardType="numeric"
+      />
+
+      <Button  
+        title="Search"  
+        onPress={() => this.props.navigation.navigate('SearchResultsScreen', {number: this.state.number})}  
       />
 	  </ImageBackground>
     </View>

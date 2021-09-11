@@ -5,7 +5,7 @@ const results = usda("815893000163");
 //var rn_bridge = require('rn-bridge');
 
 results.then(function(result) {
-   console.log(result[0].foodNutrients[3].nutrientNumber) 
+   console.log(result[0])//.foodNutrients[3])//.nutrientNumber) 
 })
 
 // Echo every message received from react-native.
@@ -34,14 +34,3 @@ var app = http.createServer(function(req, res) {
           });
 
 app.listen(port, hostname);*/
-
-/*const express = require('express')
-const app = express()
-const port = process.env.PORT || 5000;
-
-app.get('/', (req, res) => {
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' })
-}
-)
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))*/
