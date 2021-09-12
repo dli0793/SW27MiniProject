@@ -6,10 +6,41 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigator, TabNavigator, NavigationActions, withNavigation } from 'react-navigation';
 import nodejs from 'nodejs-mobile-react-native';
+import firebase from "firebase/app";
+import "firebase/functions";
+import { useDebounce } from 'use-debounce';
 //const usda = require('../usda')
 
 function ResultScreen(props){
-  const data = props.navigation.getParam("data", "NO-BARCODE");
+  const data2 = props.navigation.getParam("data", "NO-BARCODE");
+  //const data2 = 815893000163;
+  //var data3, data4, data5;
+  const [data3, setData3] = useState('');
+  const [data4, setData4] = useState('');
+  const [data5, setData5] = useState('');
+  var response2;
+  //var debouncedSearchTerm = useDebounce(data2, 1000);
+
+  if(data2){
+  useEffect(() => {
+      (async () => {
+        const sayHello = firebase.functions().httpsCallable('sayHello')
+        sayHello({barcode: data2}).then(response => {
+              if(response)
+              {
+                response2 = response.data;
+                setData3(response2[0].description);
+                setData4(response2[0].ingredients); 
+                setData5(response2[0].foodNutrients[3].value);
+                console.log(response.data);
+                console.log(data3); 
+              }
+        });
+      })();
+    }, []);
+  }
+
+  //console.log(response2);
   
   /*this.state = {
     result: data
@@ -68,11 +99,14 @@ function ResultScreen(props){
   
   return (
     <View style={styles.container}>
-      <Text>{data}</Text>
+      <Text>{data2}</Text>
 	  <Button  
           title="Go to Scan Again"  
           onPress={() => props.navigation.navigate('DashBoardScreen')}  
         />
+    <Text>Food Description: {data3}</Text>
+    <Text>Ingredients: {data4}</Text>
+    <Text>Calories: {data5} kCal</Text>
     </View>
   );
 }
