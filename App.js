@@ -10,6 +10,7 @@ import LoginScreen from './screens/LoginScreen';
 import ResultScreen from './screens/ResultScreen';
 import FetchingBarcode from './screens/FetchingBarcode';
 import SearchResultsScreen from './screens/SearchResultsScreen';
+import SavedListScreen from './screens/SavedListScreen';
 
 import firebase from 'firebase';
 import { firebaseConfig } from './config';
@@ -30,7 +31,8 @@ const AppSwitchNavigator = createSwitchNavigator({
 	  DashBoardScreen:DashBoardScreen,
 	  //LoadingScreen:LoadingScreen,
 	  ResultScreen:ResultScreen,
-    SearchResultsScreen:SearchResultsScreen
+    SearchResultsScreen:SearchResultsScreen,
+    SavedListScreen:SavedListScreen
     //FetchingBarcode:FetchingBarcode
 })
   
