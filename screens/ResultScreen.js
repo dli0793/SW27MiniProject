@@ -13,6 +13,9 @@ import { useDebounce } from 'use-debounce';
 
 function ResultScreen(props){
   const data2 = props.navigation.getParam("data", "NO-BARCODE");
+  var serving = props.navigation.getParam("number2","1");
+  if(!serving)
+    serving = 1;
   //setTimeout(data2, 250);
   //const data2 = 815893000163;
   //var data3, data4, data5;
@@ -97,7 +100,8 @@ function ResultScreen(props){
   }, [])    
 
   console.log(data2);*/
-  
+  console.log(serving);
+
   return (
     <View style={styles.container}>
       <Text>{data2}</Text>
@@ -107,7 +111,7 @@ function ResultScreen(props){
         />
     <Text>Food Description: {data3}</Text>
     <Text>Ingredients: {data4}</Text>
-    <Text>Calories: {data5} kCal</Text>
+    <Text>Calories: {data5*serving} kCal</Text>
     <Button  
         title="Save Data"  
         onPress={() => props.navigation.navigate('SavedListScreen', {data3: data3, data4: data4, data5: data5})}  

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Fragment} from 'react';
 import {
   StyleSheet,
   Button,
@@ -13,8 +14,7 @@ import { ListItem, Divider } from 'react-native-elements';
 
 class FoodList extends Component {
   state = {
-    foodList: [],
-    currentFoodItem: null
+    foodList: []
   }
 
   onFoodAdded = (food) => {
@@ -45,37 +45,45 @@ class FoodList extends Component {
   }
 
   render() {
+    console.log(this.state.foodList);
     return this.state.foodList.length > 0 ?
       <SafeAreaView style={styles.container}>
         <FlatList
           data={this.state.foodList}
           ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
-          keyExtractor={(item, index) => index}
-          renderItem={({ item, index }) => {
+          //keyExtractor={(item, index) => index.toString()}
+        //   renderItem={({ item, index }) => {
+            renderItem={({item}) =>
+            <Fragment>
+                <Text style={styles.item}>Food Description: {item.name}</Text>
+                <Text style={styles.item}>Food Ingredients: {item.ingredients}</Text>
+                <Text style={styles.item}>Calories: {item.calories} kCal</Text>
+            </Fragment>
             //console.log("*******************");
             //console.log(item);
-            return (
-              <ListItem
-                containerStyle={styles.listItem}
-                title={item.name}
-                subtitle={`Ingredients: ${item.ingredients}     Calories: ${item.calories}`}
-                titleStyle={styles.titleStyle}
-                subtitleStyle={styles.subtitleStyle}
-                leftAvatar={{
-                  size: 'large',
-                  rounded: false,
-                  //source: item.image && { uri: item.image }
-                }}
-              />
-            );
+            //this.state.currentFoodItem= item;
+            // return (
+            //   <ListItem
+            //     containerStyle={styles.listItem}
+            //     title={item.name}
+            //     subtitle={`Ingredients: ${item.ingredients}     Calories: ${item.calories}`}
+            //     titleStyle={styles.titleStyle}
+            //     subtitleStyle={styles.subtitleStyle}
+            //     leftAvatar={{
+            //       size: 'large',
+            //       rounded: false,
+            //       //source: item.image && { uri: item.image }
+            //     }}
+            //   />
+            // );
           }
-          }
+        
         />
         <Button  
           title="Go to Scan Again"  
           onPress={() => this.props.navigation.navigate('DashBoardScreen')}  
         />
-      </SafeAreaView> :
+      </SafeAreaView>: 
       <View style={styles.textContainer}>
         <Text style={styles.emptyTitle}>No Foods found</Text>
         <Text style={styles.emptySubtitle}>Add a new food by scanning or entering food in previous screen</Text>
@@ -83,6 +91,7 @@ class FoodList extends Component {
       
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

@@ -15,6 +15,7 @@ import "firebase/functions";
 
 function SearchResultsScreen(props){
   const data = props.navigation.getParam("number", "NO-RESULTS");
+  const serving = props.navigation.getParam("number2","1");
 
   const [data2, setData] = useState('');
 
@@ -43,7 +44,7 @@ function SearchResultsScreen(props){
   if(data2){
     console.log(data2.foods[0]);
     var data3 = data2.foods[0].ingredients;
-    var data4 = data2.foods[0].foodNutrients[3].value;
+    var data4 = data2.foods[0].foodNutrients[3].value * serving;
   }
   
   return (

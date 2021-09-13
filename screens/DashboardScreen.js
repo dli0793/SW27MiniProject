@@ -105,7 +105,9 @@ class DashboardScreen extends Component{
     hasPermission: null, // app has camera permission
     scanned: false, // if scanned already
     number: null,
-    onChangeNumber: null
+    onChangeNumber: null,
+    number2: null,
+    onChangeNumber2: null
   }
   async componentDidMount() {
     //asks for camera permission
@@ -118,13 +120,15 @@ class DashboardScreen extends Component{
       console.log('Type: ' + type + '\nData: ' + data)
 	  //Reads the data into result screen
       this.props.navigation.navigate('ResultScreen', {
-        data: data 
+        data: data,
+        number2: this.state.number2 
       });
 	  
   }
   render(){
     const { hasPermission, scanned } = this.state;
     const { number, onChangeNumber } = this.state;
+    const { number2, onChangeNumber2 } = this.state;
 
     if(hasPermission === null){
       // requesting permission
@@ -167,9 +171,17 @@ class DashboardScreen extends Component{
         //keyboardType="numeric"
       />
 
+      <TextInput
+        style={styles.input}
+        onChangeText={number2 => this.setState({ number2 })}  
+        value={this.state.number2}
+        placeholder="Enter serving size (100g)"
+        //keyboardType="numeric"
+      />
+
       <Button  
         title="Search"  
-        onPress={() => this.props.navigation.navigate('SearchResultsScreen', {number: this.state.number})}  
+        onPress={() => this.props.navigation.navigate('SearchResultsScreen', {number: this.state.number, number2: this.state.number2})}  
       />
 	  </ImageBackground>
     </View>
