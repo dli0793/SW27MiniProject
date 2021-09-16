@@ -22,7 +22,7 @@ function SearchResultsScreen(props){
   useEffect(() => {
     (async () => {
         const response = await fetch(
-            'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=' + secrets.FDA_API_KEY + '&query=' + data + '&pageSize=1'
+            'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=cffckpuSMkEWEwGQMAabRBSNvc8tBaoNbBZVGmun&query=' + data + '&pageSize=1'
            );
            const dataGrabbed = await response.json();
           //  console.log(dataGrabbed);
